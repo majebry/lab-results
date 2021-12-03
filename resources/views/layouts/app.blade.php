@@ -33,7 +33,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        @auth
+                            <li class="nav-item">
+                                <a href="{{ url('test-reports') }}" class="nav-link">Test Reports</a>
+                            </li>
+                        @endauth    
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -79,5 +83,13 @@
             @yield('content')
         </main>
     </div>
+
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    
+    <script>
+        function onSubmit(token) {
+          document.getElementById("demo-form").submit();
+        }
+      </script>
 </body>
 </html>

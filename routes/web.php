@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\TestReportController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestResultController;
+use App\Models\TestReport;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +21,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::post('/', function (Request $request) {
+    $request->validate([
+        'report_number' => ['required', 'integer'],
+        'birthdate' => ['required', 'date_format:Y-m-d']
+    ]);
+    
+    $report = TestReport::where('birthdate', $request->birthdate)
+        ->find($request->report_number);
+
+    return view('test_reports.show', compact('report'));
+});
+
+Auth::routes([
+    'register' => false,
+    'reset' => false
+]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware('auth')->group(function () {
+    Route::get('test-reports', [TestReportController::class, 'index']);
+    Route::get('test-reports/create', [TestReportController::class, 'create']);
+    Route::post('test-reports', [TestReportController::class, 'store']);
+});
