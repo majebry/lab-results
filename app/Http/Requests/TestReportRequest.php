@@ -24,10 +24,13 @@ class TestReportRequest extends FormRequest
     public function rules()
     {
         return [
+            'report_number' => ['required', 'integer','unique:test_reports'],
             'patient_id' => ['required'],
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
             'birthdate' => ['required', 'date_format:Y-m-d'],
+            'covid_result' => ['required'],
+            'file' => ['required', 'file', 'max:10240', 'mimetypes:application/pdf']
         ];
     }
 }

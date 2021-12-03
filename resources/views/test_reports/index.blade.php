@@ -6,6 +6,12 @@
             <div class="col-md-10">
                 <a href="{{ url('test-reports/create') }}" class="btn btn-primary mb-4">Add Test Report</a>
 
+                @if (session()->has('message'))
+                    <div class="alert alert-success">
+                        <p>{{ session()->get('message') }}</p>
+                    </div>
+                @endif
+                
                 <div class="card">
                     <div class="card-header">Patient Results</div>
 
@@ -18,15 +24,17 @@
                                         <th scope="col">Patient ID</th>
                                         <th scope="col">Patient Name</th>
                                         <th scope="col">Birthdate</th>
+                                        <th scope="col">Covid Result</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($reports as $report)
                                         <tr>
-                                            <th scope="row">{{ $report->id }}</th>
+                                            <th scope="row">{{ $report->report_number }}</th>
                                             <th>{{ $report->patient_id }}</th>
                                             <td>{{ $report->patient_name }}</td>
                                             <td>{{ $report->birthdate }}</td>
+                                            <td>{{ $report->covid_result }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

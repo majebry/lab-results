@@ -13,7 +13,7 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row">Report Number</th>
-                                        <td>{{ $report->id }}</th>
+                                        <td>{{ $report->report_number }}</th>
                                     </tr>
                                     <tr>
                                         <th scope="row">Patient ID</th>
@@ -22,6 +22,16 @@
                                     <tr>
                                         <th scope="row">Birthdate</th>
                                         <td>{{ $report->birthdate }}</th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Covid Result</th>
+                                        <td>{{ $report->covid_result }}</th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">File</th>
+                                        <td>
+                                            <a href="{{ url($report->file_url) }}">View</a>
+                                        </th>
                                     </tr>
                                 </tbody>
                             </table>

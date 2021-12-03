@@ -22,12 +22,19 @@ class TestReportController extends Controller
 
     public function store(TestReportRequest $request)
     {
-        TestReport::create($request->only([
-            'patient_id',
-            'first_name',
-            'last_name',
-            'birthdate'
-        ]));
+        $report = new TestReport;
+
+        $report->report_number = $request->report_number;
+        $report->patient_id = $request->patient_id;
+        $report->first_name = $request->first_name;
+        $report->last_name = $request->last_name;
+        $report->birthdate = $request->birthdate;
+        $report->is_covid_positive = $request->covid_result;
+        $report->file = $request->file->store('test_reports', 'public');
+
+        $report->save();
+
+        session()->flash('message', 'Report added successfully.');
 
         return redirect('test-reports');
     }

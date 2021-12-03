@@ -29,7 +29,8 @@ Route::post('/', function (Request $request) {
     ]);
     
     $report = TestReport::where('birthdate', $request->birthdate)
-        ->find($request->report_number);
+        ->where('report_number', $request->report_number)
+        ->first();
 
     return view('test_reports.show', compact('report'));
 });

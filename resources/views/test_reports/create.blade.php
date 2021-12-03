@@ -16,14 +16,22 @@
                 <div class="card-header">Add a Test Report</div>
 
                 <div class="card-body">
-                    <form action="{{ url('test-reports') }}" method="POST">
+                    <form action="{{ url('test-reports') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+
+                        <div class="row mb-3">
+                            <label class="col-md-4 col-form-label text-md-right">Report Number</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="report_number" value="{{ old('report_number') }}">
+                            </div>
+                        </div>
 
                         <div class="row mb-3">
                             <label class="col-md-4 col-form-label text-md-right">Identity</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="patient_id">
+                                <input type="text" class="form-control" name="patient_id" value="{{ old('patient_id') }}">
                             </div>
                         </div>
 
@@ -31,7 +39,7 @@
                             <label class="col-md-4 col-form-label text-md-right">First Name</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="first_name">
+                                <input type="text" class="form-control" name="first_name" value="{{ old('first_name') }}">
                             </div>
                         </div>
 
@@ -39,7 +47,7 @@
                             <label class="col-md-4 col-form-label text-md-right">Last Name</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="last_name">
+                                <input type="text" class="form-control" name="last_name" value="{{ old('last_name') }}">
                             </div>
                         </div>
 
@@ -47,7 +55,31 @@
                             <label class="col-md-4 col-form-label text-md-right">Birthdate</label>
 
                             <div class="col-md-6">
-                                <input type="date" class="form-control" name="birthdate">
+                                <input type="date" class="form-control" name="birthdate" value="{{ old('birthdate') }}">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-md-4 col-form-label text-md-right">Covid Result</label>
+
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" name="covid_result" value="positive">
+                                    <label>Positive</label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" name="covid_result" value="negative">
+                                    <label>Negative</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-md-4 col-form-label text-md-right">File</label>
+
+                            <div class="col-md-6">
+                                <input type="file" class="form-control" name="file">
                             </div>
                         </div>
 

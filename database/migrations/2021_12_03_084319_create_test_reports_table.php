@@ -15,10 +15,13 @@ class CreateTestReportsTable extends Migration
     {
         Schema::create('test_reports', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('report_number')->unique();
             $table->string('patient_id');
             $table->string('first_name');
             $table->string('last_name');
             $table->date('birthdate');
+            $table->boolean('is_covid_positive')->default(false);
+            $table->string('file');
             $table->timestamps();
         });
     }
