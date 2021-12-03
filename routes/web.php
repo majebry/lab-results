@@ -24,7 +24,8 @@ Route::get('/', function () {
 Route::post('/', function (Request $request) {
     $request->validate([
         'report_number' => ['required', 'integer'],
-        'birthdate' => ['required', 'date_format:Y-m-d']
+        'birthdate' => ['required', 'date_format:Y-m-d'],
+        'g-recaptcha-response' => 'required|captcha'
     ]);
     
     $report = TestReport::where('birthdate', $request->birthdate)
