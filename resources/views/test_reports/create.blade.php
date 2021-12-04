@@ -20,15 +20,7 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label class="col-md-4 col-form-label text-md-right">Report Number</label>
-
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="report_number" value="{{ old('report_number') }}">
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label class="col-md-4 col-form-label text-md-right">Identity</label>
+                            <label class="col-md-4 col-form-label text-md-right">Patient ID</label>
 
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="patient_id" value="{{ old('patient_id') }}">

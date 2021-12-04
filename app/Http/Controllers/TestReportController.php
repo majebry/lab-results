@@ -24,7 +24,6 @@ class TestReportController extends Controller
     {
         $report = new TestReport;
 
-        $report->report_number = $request->report_number;
         $report->patient_id = $request->patient_id;
         $report->first_name = $request->first_name;
         $report->last_name = $request->last_name;

@@ -12,20 +12,20 @@
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <th scope="row">Report Number</th>
-                                        <td>{{ $report->report_number }}</th>
-                                    </tr>
-                                    <tr>
                                         <th scope="row">Patient ID</th>
                                         <td>{{ $report->patient_id }}</th>
                                     </tr>
                                     <tr>
                                         <th scope="row">Date of Birth</th>
-                                        <td>{{ $report->birthdate }}</th>
+                                        <td>{{ $report->formatted_date_of_birth }}</th>
                                     </tr>
                                     <tr>
                                         <th scope="row">Covid Result</th>
                                         <td>{{ $report->covid_result }}</th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Report Inserted At</th>
+                                        <td>{{ $report->created_at->toDayDateTimeString() }}</th>
                                     </tr>
                                     <tr>
                                         <th scope="row">File</th>

@@ -20,21 +20,21 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Report Number</th>
                                         <th scope="col">Patient ID</th>
                                         <th scope="col">Patient Name</th>
                                         <th scope="col">Date of Birth</th>
                                         <th scope="col">Covid Result</th>
+                                        <th scope="col">Report Inserted At</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($reports as $report)
                                         <tr>
-                                            <th scope="row">{{ $report->report_number }}</th>
                                             <th>{{ $report->patient_id }}</th>
                                             <td>{{ $report->patient_name }}</td>
                                             <td>{{ $report->birthdate }}</td>
                                             <td>{{ $report->covid_result }}</td>
+                                            <td>{{ $report->created_at->toDayDateTimeString() }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

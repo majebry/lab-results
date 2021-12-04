@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -36,5 +37,10 @@ class TestReport extends Model
     public function getFileUrlAttribute()
     {
         return Storage::url($this->file);
+    }
+
+    public function getFormattedDateOfBirthAttribute()
+    {
+        return Carbon::parse($this->birthdate)->format('m/d/Y');
     }
 }

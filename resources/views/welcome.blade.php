@@ -20,10 +20,10 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label class="col-md-4 col-form-label text-md-right">Report Number</label>
+                            <label class="col-md-4 col-form-label text-md-right">Last Name</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="report_number">
+                                <input type="text" class="form-control" name="last_name">
                             </div>
                         </div>
 
