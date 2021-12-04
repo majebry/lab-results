@@ -23,7 +23,7 @@
                                         <th scope="col">Report Number</th>
                                         <th scope="col">Patient ID</th>
                                         <th scope="col">Patient Name</th>
-                                        <th scope="col">Birthdate</th>
+                                        <th scope="col">Date of Birth</th>
                                         <th scope="col">Covid Result</th>
                                     </tr>
                                 </thead>

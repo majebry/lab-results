@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label class="col-md-4 col-form-label text-md-right">Birthdate</label>
+                            <label class="col-md-4 col-form-label text-md-right">Date of Birth</label>
 
                             <div class="col-md-6">
                                 <input type="date" class="form-control" name="birthdate" value="{{ old('birthdate') }}">

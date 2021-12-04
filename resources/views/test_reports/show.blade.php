@@ -20,7 +20,7 @@
                                         <td>{{ $report->patient_id }}</th>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Birthdate</th>
+                                        <th scope="row">Date of Birth</th>
                                         <td>{{ $report->birthdate }}</th>
                                     </tr>
                                     <tr>
