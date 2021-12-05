@@ -24,7 +24,6 @@ class TestReportRequest extends FormRequest
     public function rules()
     {
         return [
-            'patient_id' => ['required'],
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
             'birthdate' => ['required', 'date_format:Y-m-d'],
