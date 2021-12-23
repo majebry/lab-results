@@ -35,7 +35,7 @@
                     <ul class="navbar-nav me-auto">
                         @auth
                             <li class="nav-item">
-                                <a href="{{ url('test-reports') }}" class="nav-link">Test Reports</a>
+                                <a href="{{ url('orders') }}" class="nav-link">Orders</a>
                             </li>
                         @endauth    
                     </ul>

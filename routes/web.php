@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderResultController;
 use App\Http\Controllers\TestReportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestResultController;
@@ -43,7 +45,16 @@ Auth::routes([
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
-    Route::get('test-reports', [TestReportController::class, 'index']);
-    Route::get('test-reports/create', [TestReportController::class, 'create']);
-    Route::post('test-reports', [TestReportController::class, 'store']);
+    Route::get('orders', [OrderController::class, 'index']);
+    Route::get('orders/create', [OrderController::class, 'create']);
+    Route::post('orders', [OrderController::class, 'store']);
+    Route::get('orders/{order}', [OrderController::class, 'show']);
+    
+    Route::patch('orders/{order}/mark-patient-as-swabbed', [OrderController::class, 'markPatientAsSwabbed']);
+
+    Route::post('orders/{order}/result', [OrderResultController::class, 'store']);
+    
+    // Route::get('test-reports', [TestReportController::class, 'index']);
+    // Route::get('test-reports/create', [TestReportController::class, 'create']);
+    // Route::post('test-reports', [TestReportController::class, 'store']);
 });
