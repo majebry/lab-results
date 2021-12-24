@@ -49,6 +49,7 @@
                                         <th scope="col">Patient ID</th>
                                         <th scope="col">Patient Name</th>
                                         <th scope="col">Date of Birth</th>
+                                        <th scope="col">Date of Test</th>
                                         <th scope="col">Options</th>
                                     </tr>
                                 </thead>
@@ -58,7 +59,8 @@
                                             <th>{{ $order->id }}</th>
                                             <th>{{ $order->patient_id }}</th>
                                             <td>{{ $order->patient_name }}</td>
-                                            <td>{{ $order->patient_date_of_birth }}</td>
+                                            <td>{{ $order->formatted_date_of_birth }}</td>
+                                            <td>{{ $order->formatted_date_of_test }}</td>
                                             <td>
                                                 @if ($order->is_patient_swabbed)
                                                     <button class="btn btn-light" disabled>Swabbed</button>

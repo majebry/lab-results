@@ -32,6 +32,15 @@ class Order extends Model
         return Carbon::parse($this->patient_date_of_birth)->format('m/d/Y');
     }
 
+    public function getFormattedDateOfTestAttribute()
+    {
+        if ($this->date_of_test) {
+            return Carbon::parse($this->date_of_test)->format('m/d/Y');
+        }
+
+        return null;
+    }
+
     public function result()
     {
         return $this->hasOne(Result::class);

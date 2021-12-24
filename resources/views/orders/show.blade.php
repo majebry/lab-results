@@ -40,7 +40,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">Date of Test</th>
-                                        <td>{{ $order->date_of_test }}</th>
+                                        <td>{{ $order->formatted_date_of_test }}</th>
                                     </tr>
                                 </tbody>
                             </table>
@@ -116,7 +116,7 @@
                                     @if (! $order->result)
                                         <input type="file" class="form-control" name="document">
                                     @else
-                                        <a href="{{ url($order->result->file_url) }}">View</a>
+                                        <a target="_blank" href="{{ url($order->result->file_url) }}">View</a>
                                     @endif
                                 </div>
                             </div>

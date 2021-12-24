@@ -10,7 +10,7 @@ class OrderController extends Controller
 {
     public function index(Request $request)
     {
-        $orders = Order::query();
+        $orders = Order::latest('id');
 
         $orders->when($request->id, function ($query) use ($request) {
             $query->where('id', $request->id);
@@ -21,7 +21,7 @@ class OrderController extends Controller
         });
         
         return view('orders.index', [
-            'orders' => $orders->latest()->paginate()
+            'orders' => $orders->paginate()
         ]);
     }
     

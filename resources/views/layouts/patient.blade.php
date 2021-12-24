@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <style>
         .container {
-            width: 960px;
+            max-width: 960px;
         }
 
         header img {
@@ -34,7 +34,7 @@
 <body>
     <div id="app">
         <div class="container py-5">
-            <header>
+            <header class="{{ config('app.env') == 'staging' ? 'bg-warning' : '' }}">
                 <nav class="border-bottom pb-3 mb-5 d-flex flex-column flex-md-row">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name', 'Laravel') }}" style="height: 60px">
@@ -43,7 +43,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <nav class="d-inline-flex ms-md-auto">
+                    <nav class="d-inline-flex ms-md-auto d-none d-lg-block">
                         <a target="_blank" class="me-3 py-2 text-dark text-decoration-none" href="https://premiermedicine.com">Go to the main website</a>
                     </nav>
                 </nav>
@@ -54,7 +54,7 @@
             </main>
 
             <footer class="border-top mt-5">
-                <div class="p-5 d-flex flex-row justify-content-between">
+                <div class="p-5 d-flex justify-content-between flex-sm-row flex-xs-row flex-column">
                     <div>
                         <h5>Livonia</h5>
     
