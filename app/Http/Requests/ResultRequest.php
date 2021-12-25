@@ -28,7 +28,7 @@ class ResultRequest extends FormRequest
             'has_flu_a' => ['boolean'],
             'has_flu_b' => ['boolean'],
             'has_rsv' => ['boolean'],
-            'document' => ['required', 'file', 'max:10240', 'mimetypes:application/pdf']
+            'document' => ['required', 'file', 'max:1024', 'mimetypes:application/pdf']
         ];
     }
 }

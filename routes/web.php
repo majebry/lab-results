@@ -29,7 +29,7 @@ Route::post('/', function (Request $request) {
         'birthdate' => ['required', 'date_format:Y-m-d'],
     ];
 
-    if (config('app.env') == 'production') {
+    if (config('app.env') != 'local') {
         $rules['g-recaptcha-response'] = ['required', 'captcha'];
     }
     
@@ -77,7 +77,10 @@ Route::middleware('auth')->group(function () {
             $order->patient_first_name = $report->first_name;
             $order->patient_last_name = $report->last_name;
             $order->patient_date_of_birth = $report->birthdate;
+            $order->reason_of_test = 'Exposed';
+            $order->covid_test_type = 'Sars-cov-2 PCR';
             $order->is_patient_swabbed = true;
+            $order->date_of_test = $report->created_at;
             $order->created_at = $report->created_at;
 
             $order->save();

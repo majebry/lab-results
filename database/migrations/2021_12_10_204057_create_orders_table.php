@@ -19,11 +19,11 @@ class CreateOrdersTable extends Migration
             $table->string('patient_first_name');
             $table->string('patient_last_name');
             $table->date('patient_date_of_birth');
-            $table->string('patient_phone')->nullable(); // temporarily nullable
+            $table->string('patient_phone')->nullable();
             $table->string('patient_email')->nullable();
-            $table->string('reason_of_test')->nullable(); // temporarily nullable
-            $table->string('covid_test_type')->nullable(); // temporarily nullable
-            $table->date('date_of_test')->nullable(); // temporarily nullable
+            $table->string('reason_of_test');
+            $table->string('covid_test_type');
+            $table->date('date_of_test');
             $table->boolean('is_patient_swabbed')->default(false);
             $table->timestamps();
         });

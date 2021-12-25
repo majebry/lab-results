@@ -72,9 +72,8 @@
 
                             <div class="col-md-6">
                                 <select name="reason_of_test" class="form-control">
-                                    <option value="">-- Choose --</option>
-                                    <option value="travel" {{ old('reason_of_test') == 'travel' ? 'selected' : '' }}>Traveling</option>
-                                    <option value="exposed" {{ old('reason_of_test') == 'exposed' ? 'selected' : '' }}>Exposed</option>
+                                    <option value="Exposed" {{ old('reason_of_test') == 'Exposed' ? 'selected' : '' }}>Exposed</option>
+                                    <option value="Traveling" {{ old('reason_of_test') == 'Traveling' ? 'selected' : '' }}>Traveling</option>
                                 </select>
                             </div>
                         </div>
@@ -84,8 +83,8 @@
 
                             <div class="col-md-6">
                                 <select name="covid_test_type" class="form-control">
-                                    <option value="">-- Choose --</option>
-                                    <option value="pcr" {{ old('covid_test_type') == 'pcr' ? 'selected' : '' }}>PCR</option>
+                                    <option value="Sars-cov-2 NAA" {{ old('covid_test_type') == 'Sars-cov-2 NAA' ? 'selected' : '' }}>Sars-cov-2 NAA</option>
+                                    <option value="Sars-cov-2 PCR" {{ old('covid_test_type') == 'Sars-cov-2 PCR' ? 'selected' : '' }}>Sars-cov-2 PCR</option>
                                 </select>
                             </div>
                         </div>

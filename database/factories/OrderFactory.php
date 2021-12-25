@@ -21,8 +21,8 @@ class OrderFactory extends Factory
             'patient_date_of_birth' => $this->faker->date(),
             'patient_phone' => $this->faker->phoneNumber,
             'patient_email' => Arr::random([null, $this->faker->email]),
-            'reason_of_test' => Arr::random(['Traveling', 'Exposed']),
-            'covid_test_type' => 'pcr',
+            'reason_of_test' => Arr::random(['Exposed', 'Traveling']),
+            'covid_test_type' => Arr::random(['Sars-cov-2 NAA', 'Sars-cov-2 PCR']),
             'date_of_test' => date('Y-m-d'),
         ];
     }
