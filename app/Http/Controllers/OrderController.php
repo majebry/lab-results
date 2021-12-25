@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Order;
+use Illuminate\Http\Request;
+use App\Http\Requests\OrderRequest;
+
+class OrderController extends Controller
+{
+    public function index(Request $request)
+    {
+        $orders = Order::latest('id');
+
+        $orders->when($request->id, function ($query) use ($request) {
+            $query->where('id', $request->id);
+        });
+
+        $orders->when($request->patient_date_of_birth, function ($query) use ($request) {
+            $query->where('patient_date_of_birth', $request->patient_date_of_birth);
+        });
+        
+        return view('orders.index', [
+            'orders' => $orders->paginate()
+        ]);
+    }
+    
+    public function create()
+    {
+        return view('orders.create');
+    }
+
+    public function store(OrderRequest $request)
+    {
+        $order = Order::create($request->all());
+
+        session()->flash('message', "Order {$order->id} created.");
+
+        return redirect('orders');
+    }
+
+    public function show(Order $order)
+    {
+        return view('orders.show', [
+            'order' => $order->load('result')
+        ]);
+    }
+
+    public function markPatientAsSwabbed(Order $order)
+    {
+        $order->is_patient_swabbed = true;
+
+        $order->save();
+
+        return redirect('orders');
+    }
+}
