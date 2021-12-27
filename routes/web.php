@@ -25,7 +25,7 @@ Route::get('/', function () {
 
 Route::post('/', function (Request $request) {
     $rules = [
-        'last_name' => ['required', 'string'],
+        'name' => ['required', 'string'],
         'birthdate' => ['required', 'date_format:Y-m-d'],
     ];
 
@@ -37,7 +37,7 @@ Route::post('/', function (Request $request) {
     
     $orders = Order::with('result')
         ->where('patient_date_of_birth', $request->birthdate)
-        ->where('patient_last_name', $request->last_name)
+        ->where('patient_name', $request->name)
         ->latest()
         ->get();
 
@@ -56,8 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::get('orders/create', [OrderController::class, 'create']);
     Route::post('orders', [OrderController::class, 'store']);
     Route::get('orders/{order}', [OrderController::class, 'show']);
-    
-    Route::patch('orders/{order}/mark-patient-as-swabbed', [OrderController::class, 'markPatientAsSwabbed']);
+    Route::delete('orders/{order}', [OrderController::class, 'destroy']);
 
     Route::post('orders/{order}/result', [OrderResultController::class, 'store']);
     
@@ -91,6 +90,19 @@ Route::middleware('auth')->group(function () {
             $result->document = $report->file;
             
             $order->result()->save($result);
+        }
+
+        return 'should be migrated!';
+    });
+
+    Route::get('migrate2', function () {
+        if (Order::whereNotNull('patient_name')->count()) {
+            return 'already migrated before?';
+        }
+
+        foreach (Order::all() as $order) {
+            $order->patient_name = $order->patient_first_name . ' ' . $order->patient_last_name;
+            $order->save();
         }
 
         return 'should be migrated!';

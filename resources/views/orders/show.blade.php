@@ -135,6 +135,14 @@
                         </form>
                     </div>
                 </div>
+
+                <div class="mt-5">
+                    <form action="{{ url("orders/{$order->id}") }}" method="post" style="display:inline">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger">Delete Order</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

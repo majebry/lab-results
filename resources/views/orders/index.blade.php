@@ -46,10 +46,10 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Patient ID</th>
                                         <th scope="col">Patient Name</th>
                                         <th scope="col">Date of Birth</th>
                                         <th scope="col">Date of Test</th>
+                                        <th scope="col">Covid Result</th>
                                         <th scope="col">Options</th>
                                     </tr>
                                 </thead>
@@ -57,26 +57,16 @@
                                     @foreach ($orders as $order)
                                         <tr>
                                             <th>{{ $order->id }}</th>
-                                            <th>{{ $order->patient_id }}</th>
                                             <td>{{ $order->patient_name }}</td>
                                             <td>{{ $order->formatted_date_of_birth }}</td>
                                             <td>{{ $order->formatted_date_of_test }}</td>
                                             <td>
-                                                @if ($order->is_patient_swabbed)
-                                                    <button class="btn btn-light" disabled>Swabbed</button>
-
-                                                    @if ($order->result)
-                                                        <button class="btn btn-light" disabled>Result issued</button>
-                                                    @endif
-                                                
-                                                    <a href="{{ url('orders/' . $order->id) }}" class="btn btn-info">Show</a>
-                                                @else
-                                                    <form action="{{ url("orders/{$order->id}/mark-patient-as-swabbed") }}" method="post" style="display:inline">
-                                                        @csrf
-                                                        @method('PATCH')
-                                                        <button class="btn btn-warning">Mark as swabbed</button>
-                                                    </form>
-                                                @endif
+                                                @if ($order->result)
+                                                    {{ $order->result->has_covid ? 'Positive' : 'Negative' }}
+                                                @endif    
+                                            </td>
+                                            <td>
+                                                <a href="{{ url('orders/' . $order->id) }}" class="btn btn-info">Show</a>
                                             </td>
                                         </tr>
                                     @endforeach
