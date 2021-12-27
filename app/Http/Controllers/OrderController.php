@@ -10,7 +10,9 @@ class OrderController extends Controller
 {
     public function index(Request $request)
     {
-        $orders = Order::latest('id');
+        $orders = Order::orderBy('date_of_test', 'DESC')
+            ->orderBy('created_at', 'DESC')
+            ->with('result');
 
         $orders->when($request->id, function ($query) use ($request) {
             $query->where('id', $request->id);
@@ -46,11 +48,9 @@ class OrderController extends Controller
         ]);
     }
 
-    public function markPatientAsSwabbed(Order $order)
+    public function destroy(Order $order)
     {
-        $order->is_patient_swabbed = true;
-
-        $order->save();
+        $order->delete();
 
         return redirect('orders');
     }

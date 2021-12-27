@@ -20,26 +20,10 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label class="col-md-4 col-form-label text-md-right">Patient ID</label>
+                            <label class="col-md-4 col-form-label text-md-right">Full Name</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="patient_id" value="{{ old('patient_id') }}">
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label class="col-md-4 col-form-label text-md-right">First Name</label>
-
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="patient_first_name" value="{{ old('patient_first_name') }}">
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label class="col-md-4 col-form-label text-md-right">Last Name</label>
-
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="patient_last_name" value="{{ old('patient_last_name') }}">
+                                <input type="text" class="form-control" name="patient_name" value="{{ old('patient_name') }}">
                             </div>
                         </div>
 

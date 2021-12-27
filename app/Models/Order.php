@@ -12,8 +12,7 @@ class Order extends Model
 
     protected $fillable = [
         'patient_id',
-        'patient_first_name',
-        'patient_last_name',
+        'patient_name',
         'patient_date_of_birth',
         'patient_phone',
         'patient_email',
@@ -21,11 +20,6 @@ class Order extends Model
         'covid_test_type',
         'date_of_test',
     ];
-    
-    public function getPatientNameAttribute()
-    {
-        return "{$this->patient_first_name} {$this->patient_last_name}";
-    }
 
     public function getFormattedDateOfBirthAttribute()
     {

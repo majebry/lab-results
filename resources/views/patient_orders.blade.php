@@ -11,10 +11,6 @@
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <th scope="row">Patient ID</th>
-                                    <td>{{ $order->patient_id }}</th>
-                                </tr>
-                                <tr>
                                     <th scope="row">Patient Name</th>
                                     <td>{{ $order->patient_name }}</th>
                                 </tr>

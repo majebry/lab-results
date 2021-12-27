@@ -15,9 +15,7 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
-            'patient_id' => $this->faker->ssn,
-            'patient_first_name' => $this->faker->firstName,
-            'patient_last_name' => $this->faker->lastName,
+            'patient_name' => $this->faker->name(),
             'patient_date_of_birth' => $this->faker->date(),
             'patient_phone' => $this->faker->phoneNumber,
             'patient_email' => Arr::random([null, $this->faker->email]),
