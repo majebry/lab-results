@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Requests\OrderRequest;
+use Exception;
 
 class OrderController extends Controller
 {
@@ -36,7 +37,10 @@ class OrderController extends Controller
     {
         $order = Order::create($request->all());
 
-        session()->flash('message', "Order {$order->id} created.");
+        session()->flash('status', [
+            'status' => 'success',
+            'message' => "Order {$order->id} created."
+        ]);
 
         return redirect('orders');
     }
@@ -51,6 +55,47 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         $order->delete();
+
+        session()->flash('status', [
+            'status' => 'success',
+            'message' => "Order {$order->id} deleted."
+        ]);
+
+        return redirect('orders');
+    }
+
+    public function markPatientAsCalled(Order $order)
+    {
+        $order->is_patient_called = true;
+
+        $order->save();
+
+        return redirect('orders');
+    }
+
+    public function notifyPatientViaSms(Order $order)
+    {
+        if ($order->patient_phone && !$order->is_patient_notified) {
+            try {
+                $order->notify(new \App\Notifications\ResultAvailable);
+            } catch (Exception $exception) {
+                error_log(print_r([time() => [
+                    'order' => $order->id,
+                    'error' => $exception->getMessage()
+                ]], true), 3, storage_path() . '/logs/sms.log');
+
+                session()->flash('status', [
+                    'status' => 'danger',
+                    'message' => "Error happened."
+                ]);
+                
+                return redirect('orders');
+            }
+        }
+
+        $order->is_patient_notified = true;
+        
+        $order->save();
 
         return redirect('orders');
     }

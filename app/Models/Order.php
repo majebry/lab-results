@@ -5,10 +5,11 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected $fillable = [
         'patient_id',
@@ -38,5 +39,10 @@ class Order extends Model
     public function result()
     {
         return $this->hasOne(Result::class);
+    }
+
+    public function routeNotificationForNexmo($notification)
+    {
+        return preg_replace('/[^0-9]/', '', $this->patient_phone);
     }
 }

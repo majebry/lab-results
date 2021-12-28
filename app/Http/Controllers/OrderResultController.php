@@ -17,8 +17,11 @@ class OrderResultController extends Controller
 
         $order->result()->save($result);
         
-        session()->flash('message', 'Result inserted.');
+        session()->flash('status', [
+            'status' => 'success',
+            'message' => "Result inserted."
+        ]);
 
-        return redirect('orders/' . $order->id);
+        return redirect('orders');
     }
 }
