@@ -58,6 +58,9 @@ Route::middleware('auth')->group(function () {
     Route::get('orders/{order}', [OrderController::class, 'show']);
     Route::delete('orders/{order}', [OrderController::class, 'destroy']);
 
+    Route::patch('orders/{order}/mark-patient-as-called', [OrderController::class, 'markPatientAsCalled']);
+    Route::post('orders/{order}/notify-patient-via-sms', [OrderController::class, 'notifyPatientViaSms']);
+
     Route::post('orders/{order}/result', [OrderResultController::class, 'store']);
     
     // Route::get('test-reports', [TestReportController::class, 'index']);

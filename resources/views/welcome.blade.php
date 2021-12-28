@@ -22,7 +22,7 @@
                 @csrf
 
                 <div class="row mb-3">
-                    <label class="col-md-4 col-form-label text-md-right">Name</label>
+                    <label class="col-md-4 col-form-label text-md-right">Full Name</label>
 
                     <div class="col-md-6">
                         <input type="text" class="form-control form-control-lg" name="name">
@@ -33,7 +33,7 @@
                     <label class="col-md-4 col-form-label text-md-right">Date of Birth</label>
 
                     <div class="col-md-6">
-                        <input type="date" class="form-control form-control-lg" name="birthdate">
+                        <input type="text" class="form-control form-control-lg" name="birthdate" placeholder="mm/dd/yyyy">
                     </div>
                 </div>
 

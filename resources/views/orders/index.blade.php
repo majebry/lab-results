@@ -31,9 +31,9 @@
                     </div>
                 </form>
 
-                @if (session()->has('message'))
-                    <div class="alert alert-success">
-                        <p>{{ session()->get('message') }}</p>
+                @if (session()->has('status'))
+                    <div class="alert alert-{{ session()->get('status')['status'] }}">
+                        <p>{{ session()->get('status')['message'] }}</p>
                     </div>
                 @endif
                 
@@ -67,6 +67,23 @@
                                             </td>
                                             <td>
                                                 <a href="{{ url('orders/' . $order->id) }}" class="btn btn-info">Show</a>
+
+                                                @if ($order->is_patient_called)
+                                                    <button class="btn btn-outline-info" disabled>Called</button>
+                                                @else
+                                                    <form action="{{ url("orders/{$order->id}/mark-patient-as-called") }}" method="post" style="display:inline">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <button class="btn btn-warning">Mark as called</button>
+                                                    </form>
+                                                @endif
+
+                                                @if ($order->patient_phone && !$order->is_patient_notified)
+                                                    <form action="{{ url("orders/{$order->id}/notify-patient-via-sms") }}" method="post" style="display:inline">
+                                                        @csrf
+                                                        <button class="btn btn-secondary">Notify Patient</button>
+                                                    </form>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
