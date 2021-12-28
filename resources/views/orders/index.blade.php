@@ -78,11 +78,15 @@
                                                     </form>
                                                 @endif
 
-                                                @if ($order->patient_phone && !$order->is_patient_notified)
+                                                @if ($order->patient_phone && $order->is_patient_called && !$order->is_patient_notified)
                                                     <form action="{{ url("orders/{$order->id}/notify-patient-via-sms") }}" method="post" style="display:inline">
                                                         @csrf
                                                         <button class="btn btn-secondary">Notify Patient</button>
                                                     </form>
+                                                @endif
+
+                                                @if ($order->is_patient_notified)
+                                                    <button class="btn btn-outline-info" disabled>Notified</button>
                                                 @endif
                                             </td>
                                         </tr>
