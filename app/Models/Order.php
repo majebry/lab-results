@@ -43,6 +43,6 @@ class Order extends Model
 
     public function routeNotificationForNexmo($notification)
     {
-        return preg_replace('/[^0-9]/', '', $this->patient_phone);
+        return '1' . preg_replace('/[^0-9]/', '', $this->patient_phone);
     }
 }
