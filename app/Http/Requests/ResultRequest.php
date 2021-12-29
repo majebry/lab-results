@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ResultRequest extends FormRequest
 {
@@ -28,7 +29,15 @@ class ResultRequest extends FormRequest
             'has_flu_a' => ['boolean'],
             'has_flu_b' => ['boolean'],
             'has_rsv' => ['boolean'],
-            'document' => ['required', 'file', 'max:1024', 'mimetypes:application/pdf']
+            'physician' => ['required', Rule::in([
+                'Nabil Suliman, MD',
+                'Bethany Brooks, PA-C',
+                'Alexis Arment, FNP',
+                'S. Chowdhury, MD',
+                'Shahid Ansari, MD',
+                'Njita Honorine, FNP',                
+            ])]
+            // 'document' => ['required', 'file', 'max:1024', 'mimetypes:application/pdf']
         ];
     }
 }

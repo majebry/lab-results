@@ -15,6 +15,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
+        "mikehaertl/php-pdftk": "^0.11.0",
         "nexmo/laravel": "^2.4"
     },
     "require-dev": {

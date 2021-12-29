@@ -33,7 +33,7 @@
                     <label class="col-md-4 col-form-label text-md-right">Date of Birth</label>
 
                     <div class="col-md-6">
-                        <input type="text" class="form-control form-control-lg" name="birthdate" placeholder="mm/dd/yyyy">
+                        <input type="date" class="form-control form-control-lg" name="birthdate" placeholder="mm/dd/yyyy">
                     </div>
                 </div>
 

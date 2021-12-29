@@ -6,6 +6,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Requests\OrderRequest;
 use Exception;
+use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
@@ -54,6 +55,8 @@ class OrderController extends Controller
 
     public function destroy(Order $order)
     {
+        Storage::disk('public')->delete($order->result->document);
+        
         $order->delete();
 
         session()->flash('status', [

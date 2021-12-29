@@ -11,10 +11,6 @@
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <th scope="row">Patient ID</th>
-                                        <td>{{ $order->patient_id }}</th>
-                                    </tr>
-                                    <tr>
                                         <th scope="row">Patient Name</th>
                                         <td>{{ $order->patient_name }}</th>
                                     </tr>
@@ -111,15 +107,30 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label class="col-md-4 col-form-label text-md-right">Report Document</label>
+                                <label class="col-md-4 col-form-label text-md-right">Physician</label>
                                 <div class="col-md-6">
                                     @if (! $order->result)
-                                        <input type="file" class="form-control" name="document">
+                                        <select name="physician" class="form-control">
+                                            <option value="Nabil Suliman, MD">Nabil Suliman, MD</option>
+                                            <option value="Bethany Brooks, PA-C">Bethany Brooks, PA-C</option>
+                                            <option value="Alexis Arment, FNP">Alexis Arment, FNP</option>
+                                            <option value="S. Chowdhury, MD">S. Chowdhury, MD</option>
+                                            <option value="Shahid Ansari, MD">Shahid Ansari, MD</option>
+                                            <option value="Njita Honorine, FNP">Njita Honorine, FNP</option>
+                                        </select>
                                     @else
-                                        <a target="_blank" href="{{ url($order->result->file_url) }}">View</a>
+                                        {{ $order->result->physician }}
                                     @endif
                                 </div>
                             </div>
+                            @if ($order->result)
+                                <div class="row mb-3">
+                                    <label class="col-md-4 col-form-label text-md-right">Report Document</label>
+                                    <div class="col-md-6">
+                                        <a target="_blank" href="{{ url($order->result->file_url) }}">View</a>
+                                    </div>
+                                </div>
+                            @endif
                             @if (! $order->result)
                                 <div class="row mb-0">
                                     <div class="col-md-6 offset-md-4">

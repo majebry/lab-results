@@ -16,6 +16,7 @@ class Result extends Model
         'has_flu_b',
         'has_rsv',
         'document',
+        'physician'
     ];
 
     protected $casts = [
