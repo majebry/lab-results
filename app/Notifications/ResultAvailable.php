@@ -45,7 +45,7 @@ class ResultAvailable extends Notification
         
         return (new NexmoMessage)
             ->content("Your result is available @ PMTestResults.com
-Use {$notifiable->patient_name} & {$notifiable->formatted_date_of_birth} To get your report. 
+Use order# {$notifiable->id} & {$notifiable->formatted_date_of_birth} To get your report. 
 Thank you");
     }
 
