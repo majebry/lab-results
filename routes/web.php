@@ -25,7 +25,7 @@ Route::get('/', function () {
 
 Route::post('/', function (Request $request) {
     $rules = [
-        'name' => ['required', 'string'],
+        'number' => ['required', 'integer'],
         'birthdate' => ['required', 'date_format:Y-m-d'],
     ];
 
@@ -35,13 +35,13 @@ Route::post('/', function (Request $request) {
     
     $request->validate($rules);
     
-    $orders = Order::with('result')
+    $order = Order::has('result')
+        ->with('result')
         ->where('patient_date_of_birth', $request->birthdate)
-        ->where('patient_name', $request->name)
         ->latest()
-        ->get();
+        ->find($request->number);
 
-    return view('patient_orders', compact('orders'));
+    return view('patient_orders', compact('order'));
 });
 
 Auth::routes([
