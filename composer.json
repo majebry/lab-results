@@ -16,7 +16,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "mikehaertl/php-pdftk": "^0.11.0",
-        "nexmo/laravel": "^2.4"
+        "nexmo/laravel": "^2.4",
+        "spatie/laravel-permission": "^5.4"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

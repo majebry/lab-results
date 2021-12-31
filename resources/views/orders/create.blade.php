@@ -4,13 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            @if ($errors->any())
-                <div class="alert alert-danger" role="alert">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </div>
-            @endif
+            @include('shared.errors')
             
             <div class="card">
                 <div class="card-header">Create an Order</div>

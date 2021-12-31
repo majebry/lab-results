@@ -4,13 +4,7 @@
 
 <div class="justify-content-center">
     
-    @if ($errors->any())
-        <div class="alert alert-danger" role="alert">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </div>
-    @endif
+    @include('shared.errors')
     
     <div class="card text-center">
         <div class="card-header py-3">
