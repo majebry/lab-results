@@ -60,7 +60,7 @@
                                             <td>{{ $order->formatted_date_of_test }}</td>
                                             <td>
                                                 @if ($order->result)
-                                                    {{ $order->result->has_covid ? 'Positive' : 'Negative' }}
+                                                    {!! $order->result->has_covid ? '<span class="text-danger">Positive</span>' : '<span class="text-success">Negative</span>' !!}
                                                 @endif    
                                             </td>
                                             <td>
