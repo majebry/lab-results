@@ -34,9 +34,21 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         @auth
-                            <li class="nav-item">
-                                <a href="{{ url('orders') }}" class="nav-link">Orders</a>
-                            </li>
+                            @can('view orders')
+                                <li class="nav-item">
+                                    <a href="{{ url('orders') }}" class="nav-link {{ request()->is('orders*') ? 'active' : '' }}">Orders</a>
+                                </li>
+                            @endcan
+                            @can('view roles')
+                                <li class="nav-item">
+                                    <a href="{{ url('roles') }}" class="nav-link {{ request()->is('roles*') ? 'active' : '' }}">Roles</a>
+                                </li>
+                            @endcan
+                            @can('view users')
+                                <li class="nav-item">
+                                    <a href="{{ url('users') }}" class="nav-link {{ request()->is('users*') ? 'active' : '' }}">Users</a>
+                                </li>
+                            @endcan
                         @endauth    
                     </ul>
 

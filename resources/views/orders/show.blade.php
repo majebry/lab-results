@@ -6,13 +6,7 @@
             <div class="col-md-10">
                 @include('orders._order_details')
 
-                @if ($errors->any())
-                    <div class="alert alert-danger" role="alert">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </div>
-                @endif
+                @include('shared.errors')
         
                 <div class="card mt-4">
                     <div class="card-header">Test Result</div>
