@@ -20,7 +20,7 @@ class OrderResultController extends Controller
             'command' => config('pdftk.command', 'pdftk')
         ]);
 
-        $storedFileName = 'test_reports/' . Str::random(40) . '.pdf';
+        $storedFileName = 'test_reports/' . Str::kebab($order->patient_name) . '-result-'. Str::random(10) . '.pdf';
         
         $today = today()->format('m/d/Y');
         

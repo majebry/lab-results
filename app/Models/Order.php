@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
@@ -34,6 +35,11 @@ class Order extends Model
         }
 
         return null;
+    }
+
+    public function getVitalsDocumentUrlAttribute()
+    {
+        return Storage::url($this->vitals_document);
     }
 
     public function result()

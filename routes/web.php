@@ -1,12 +1,13 @@
 <?php
 
 use App\Models\Order;
+use App\Models\Result;
 use App\Models\TestReport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderVitalController;
 use App\Http\Controllers\OrderResultController;
-use App\Models\Result;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,9 @@ Route::middleware('auth')->group(function () {
     Route::post('orders', [OrderController::class, 'store']);
     Route::get('orders/{order}', [OrderController::class, 'show']);
     Route::delete('orders/{order}', [OrderController::class, 'destroy']);
+
+    Route::get('orders/{order}/vitals/create', [OrderVitalController::class, 'create']);
+    Route::post('orders/{order}/vitals', [OrderVitalController::class, 'store']);
 
     Route::patch('orders/{order}/mark-patient-as-called', [OrderController::class, 'markPatientAsCalled']);
     Route::post('orders/{order}/notify-patient-via-sms', [OrderController::class, 'notifyPatientViaSms']);
