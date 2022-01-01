@@ -23,6 +23,16 @@ class Order extends Model
         'date_of_test',
     ];
 
+    public function setPatientDateOfBirthAttribute($value)
+    {
+        $this->attributes['patient_date_of_birth'] = Carbon::createFromFormat('m/d/Y', $value)->toDateString();
+    }
+
+    public function setDateOfTestAttribute($value)
+    {
+        $this->attributes['date_of_test'] = Carbon::createFromFormat('m/d/Y', $value)->toDateString();
+    }
+
     public function getFormattedDateOfBirthAttribute()
     {
         return Carbon::parse($this->patient_date_of_birth)->format('m/d/Y');

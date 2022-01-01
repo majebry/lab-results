@@ -4,7 +4,13 @@
     <div class="container">
         <div class="justify-content-center row">
             <div class="col-md-10">
+                @include('shared.status')
+                
                 @include('orders._order_details')
+
+                @include('orders._options')
+
+                <div class="my-3"></div>
 
                 @include('shared.errors')
         
@@ -104,11 +110,13 @@
                 </div>
 
                 <div class="mt-5">
-                    <form action="{{ url("orders/{$order->id}") }}" method="post" style="display:inline">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger">Delete Order</button>
-                    </form>
+                    @can('delete orders')
+                        <form action="{{ url("orders/{$order->id}") }}" method="post" style="display:inline">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger">Delete Order</button>
+                        </form>
+                    @endcan
                 </div>
             </div>
         </div>

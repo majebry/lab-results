@@ -25,6 +25,7 @@ class OrderVitalController extends Controller
             'cough' => ['required'],
             'difficulty_breathing' => ['required'],
             'sore_throat' => ['required'],
+            'vaccinated' => ['required'],
             'exposed' => ['required'],
             'call_request' => ['required'],
         ]);
@@ -53,6 +54,7 @@ class OrderVitalController extends Controller
             'Breath' => $request->difficulty_breathing ? 'Byes' : 'Bno',
             'Headach' => $request->headache ? 'Hyes' : 'Hno',
             'Throat' => $request->sore_throat ? 'Tyes' : 'Tno',
+            'Vaccine' => $request->sore_throat ? 'Vyes' : 'Vno',
             'Exp' => $request->exposed ? 'Eyes' : 'Eno',
             'Pyes' => $request->call_request ? 'Choice1' : 'Pno'
         ])
@@ -70,6 +72,6 @@ class OrderVitalController extends Controller
 
         $order->save();
 
-        return redirect('orders');
+        return redirect("orders/{$order->id}");
     }
 }

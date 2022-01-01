@@ -20,6 +20,10 @@ class OrderController extends Controller
             $query->where('id', $request->id);
         });
 
+        $orders->when($request->patient_name, function ($query) use ($request) {
+            $query->where('patient_name', 'like', "%{$request->patient_name}%");
+        });
+
         $orders->when($request->patient_date_of_birth, function ($query) use ($request) {
             $query->where('patient_date_of_birth', $request->patient_date_of_birth);
         });
@@ -55,7 +59,9 @@ class OrderController extends Controller
 
     public function destroy(Order $order)
     {
-        Storage::disk('public')->delete($order->result->document);
+        if ($order->result()->exists()) {
+            Storage::disk('public')->delete($order->result->document);
+        }
         
         $order->delete();
 
@@ -92,7 +98,7 @@ class OrderController extends Controller
                     'message' => "Error happened."
                 ]);
                 
-                return redirect('orders');
+                return redirect()->back();
             }
         }
 
@@ -100,6 +106,6 @@ class OrderController extends Controller
         
         $order->save();
 
-        return redirect('orders');
+        return redirect()->back();
     }
 }

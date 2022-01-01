@@ -25,7 +25,7 @@
                             <label class="col-md-4 col-form-label text-md-right">Date of Birth</label>
 
                             <div class="col-md-6">
-                                <input type="date" class="form-control" name="patient_date_of_birth" value="{{ old('patient_date_of_birth') }}">
+                                <input type="text" class="form-control" name="patient_date_of_birth" value="{{ old('patient_date_of_birth') }}" placeholder="mm/dd/yyyy">
                             </div>
                         </div>
 
@@ -71,7 +71,7 @@
                             <label class="col-md-4 col-form-label text-md-right">Date of Test</label>
 
                             <div class="col-md-6">
-                                <input type="date" class="form-control" name="date_of_test" value="{{ old('date_of_test', date('Y-m-d')) }}">
+                                <input type="text" class="form-control" name="date_of_test" value="{{ old('date_of_test', date('m/d/Y')) }}" placeholder="mm/dd/yyyy">
                             </div>
                         </div>
 

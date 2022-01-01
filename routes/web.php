@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderVitalController;
 use App\Http\Controllers\OrderResultController;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,7 @@ Route::get('/', function () {
 Route::post('/', function (Request $request) {
     $rules = [
         'number' => ['required', 'integer'],
-        'birthdate' => ['required', 'date_format:Y-m-d'],
+        'birthdate' => ['required', 'date_format:m/d/Y'],
     ];
 
     if (config('app.env') != 'local') {
@@ -40,7 +41,7 @@ Route::post('/', function (Request $request) {
     
     $order = Order::has('result')
         ->with('result')
-        ->where('patient_date_of_birth', $request->birthdate)
+        ->where('patient_date_of_birth', Carbon::createFromFormat('m/d/Y', $request->birthdate)->toDateString())
         ->latest()
         ->find($request->number);
 
