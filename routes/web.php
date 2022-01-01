@@ -5,9 +5,12 @@ use App\Models\Result;
 use App\Models\TestReport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderVitalController;
 use App\Http\Controllers\OrderResultController;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +30,7 @@ Route::get('/', function () {
 Route::post('/', function (Request $request) {
     $rules = [
         'number' => ['required', 'integer'],
-        'birthdate' => ['required', 'date_format:Y-m-d'],
+        'birthdate' => ['required', 'date_format:m/d/Y'],
     ];
 
     if (config('app.env') != 'local') {
@@ -38,7 +41,7 @@ Route::post('/', function (Request $request) {
     
     $order = Order::has('result')
         ->with('result')
-        ->where('patient_date_of_birth', $request->birthdate)
+        ->where('patient_date_of_birth', Carbon::createFromFormat('m/d/Y', $request->birthdate)->toDateString())
         ->latest()
         ->find($request->number);
 
@@ -53,19 +56,33 @@ Auth::routes([
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
-    Route::get('orders', [OrderController::class, 'index']);
-    Route::get('orders/create', [OrderController::class, 'create']);
-    Route::post('orders', [OrderController::class, 'store']);
-    Route::get('orders/{order}', [OrderController::class, 'show']);
-    Route::delete('orders/{order}', [OrderController::class, 'destroy']);
+    Route::get('orders', [OrderController::class, 'index'])->can('view orders');
+    Route::get('orders/create', [OrderController::class, 'create'])->can('create orders');
+    Route::post('orders', [OrderController::class, 'store'])->can('create orders');
+    Route::get('orders/{order}', [OrderController::class, 'show'])->can('view orders');
+    Route::delete('orders/{order}', [OrderController::class, 'destroy'])->can('delete orders');
 
-    Route::get('orders/{order}/vitals/create', [OrderVitalController::class, 'create']);
-    Route::post('orders/{order}/vitals', [OrderVitalController::class, 'store']);
+    Route::get('orders/{order}/vitals/create', [OrderVitalController::class, 'create'])->can('create vitals');
+    Route::post('orders/{order}/vitals', [OrderVitalController::class, 'store'])->can('create vitals');
+    
+    // Route::patch('orders/{order}/mark-patient-as-called', [OrderController::class, 'markPatientAsCalled'])->can('mark patients as called');
+    Route::post('orders/{order}/notify-patient-via-sms', [OrderController::class, 'notifyPatientViaSms'])->can('notify patients');
 
-    Route::patch('orders/{order}/mark-patient-as-called', [OrderController::class, 'markPatientAsCalled']);
-    Route::post('orders/{order}/notify-patient-via-sms', [OrderController::class, 'notifyPatientViaSms']);
+    Route::post('orders/{order}/result', [OrderResultController::class, 'store'])->can('create results');
 
-    Route::post('orders/{order}/result', [OrderResultController::class, 'store']);
+    Route::get('roles', [RoleController::class, 'index'])->can('view roles');
+    Route::get('roles/create', [RoleController::class, 'create'])->can('create roles');
+    Route::post('roles', [RoleController::class, 'store'])->can('create roles');
+    Route::get('roles/{role}/edit', [RoleController::class, 'edit'])->can('edit roles');
+    Route::patch('roles/{role}', [RoleController::class, 'update'])->can('edit roles');
+    Route::delete('roles/{role}', [RoleController::class, 'destroy'])->can('delete roles');
+
+    Route::get('users', [UserController::class, 'index'])->can('view users');
+    Route::get('users/create', [UserController::class, 'create'])->can('create users');
+    Route::post('users', [UserController::class, 'store'])->can('create users');
+    Route::get('users/{user}/edit', [UserController::class, 'edit'])->can('edit users');
+    Route::patch('users/{user}', [UserController::class, 'update'])->can('edit users');
+    Route::delete('users/{user}', [UserController::class, 'destroy'])->can('delete users');
     
     // Route::get('test-reports', [TestReportController::class, 'index']);
     // Route::get('test-reports/create', [TestReportController::class, 'create']);

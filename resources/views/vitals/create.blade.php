@@ -107,6 +107,20 @@
                                 </div>
                             </div>
 
+                            <div class="row p-1">
+                                <label class="form-label col-md-9">Is the patient vaccinated for COVID-19?</label>
+                                <div class="col-md-3 text-end">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="vaccinated" id="vaccinatedYes" value="1" {{ old('vaccinated') == '1' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="vaccinatedYes">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="vaccinated" id="vaccinatedNo" value="0" {{ old('vaccinated') == '0' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="vaccinatedNo">No</label>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row p-1 bg-light">
                                 <label class="form-label col-md-9">Has the patient been exposed to a person with COVID-19 or are worried that may be sick with COVID-19?</label>
                                 <div class="col-md-3 text-end">

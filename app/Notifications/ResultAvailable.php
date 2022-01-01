@@ -44,7 +44,7 @@ class ResultAvailable extends Notification
         // check if notifiable has a phone number?
         
         return (new NexmoMessage)
-            ->content("Your result is available @ PMTestResults.com
+            ->content("Your result is available @ PMTestResults .com
 Use order# {$notifiable->id} & {$notifiable->formatted_date_of_birth} To get your report. 
 Thank you");
     }

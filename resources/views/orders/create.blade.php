@@ -4,13 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            @if ($errors->any())
-                <div class="alert alert-danger" role="alert">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </div>
-            @endif
+            @include('shared.errors')
             
             <div class="card">
                 <div class="card-header">Create an Order</div>
@@ -31,7 +25,7 @@
                             <label class="col-md-4 col-form-label text-md-right">Date of Birth</label>
 
                             <div class="col-md-6">
-                                <input type="date" class="form-control" name="patient_date_of_birth" value="{{ old('patient_date_of_birth') }}">
+                                <input type="text" class="form-control" name="patient_date_of_birth" value="{{ old('patient_date_of_birth') }}" placeholder="mm/dd/yyyy">
                             </div>
                         </div>
 
@@ -77,7 +71,7 @@
                             <label class="col-md-4 col-form-label text-md-right">Date of Test</label>
 
                             <div class="col-md-6">
-                                <input type="date" class="form-control" name="date_of_test" value="{{ old('date_of_test', date('Y-m-d')) }}">
+                                <input type="text" class="form-control" name="date_of_test" value="{{ old('date_of_test', date('m/d/Y')) }}" placeholder="mm/dd/yyyy">
                             </div>
                         </div>
 

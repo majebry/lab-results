@@ -16,7 +16,13 @@ class OrderResultController extends Controller
     {
         $result = new Result($request->all());
 
-        $resultFormPdf = new Pdf(storage_path('abbott_report.pdf'), [
+        if ($order->reason_of_test == 'Exposed') {
+            $formFile = 'abbott_report_exposed.pdf';
+        } else {
+            $formFile = 'abbott_report.pdf';
+        }
+        
+        $resultFormPdf = new Pdf(storage_path($formFile), [
             'command' => config('pdftk.command', 'pdftk')
         ]);
 
@@ -52,6 +58,6 @@ class OrderResultController extends Controller
             'message' => "Result inserted."
         ]);
 
-        return redirect('orders');
+        return redirect()->back();
     }
 }

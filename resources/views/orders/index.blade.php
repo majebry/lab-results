@@ -4,16 +4,24 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <a href="{{ url('orders/create') }}" class="btn btn-primary mb-4">Create Order</a>
+                @can('create orders')
+                    <a href="{{ url('orders/create') }}" class="btn btn-primary mb-4">Create Order</a>
+                @endcan
 
                 <form action="{{ url('orders') }}" method="GET">
                 <div class="card mb-4">
                     <div class="card-header">Filter by:</div>
-                    <div class="card-body row">
+                        <div class="card-body row">
                             <div class="col-auto row">
                                 <label class="col-auto col-form-label">Order number:</label>
                                 <div class="col-auto">
                                     <input name="id" type="number" class="form-control" value="{{ request()->id }}">
+                                </div>
+                            </div>
+                            <div class="col-auto row">
+                                <label class="col-auto col-form-label">Patient name:</label>
+                                <div class="col-auto">
+                                    <input name="patient_name" type="name" class="form-control" value="{{ request()->patient_name }}">
                                 </div>
                             </div>
                             <div class="col-auto row">
@@ -31,11 +39,7 @@
                     </div>
                 </form>
 
-                @if (session()->has('status'))
-                    <div class="alert alert-{{ session()->get('status')['status'] }}">
-                        <p>{{ session()->get('status')['message'] }}</p>
-                    </div>
-                @endif
+                @include('shared.status')
                 
                 <div class="card">
                     <div class="card-header">Orders</div>
@@ -62,43 +66,13 @@
                                             <td>{{ $order->formatted_date_of_test }}</td>
                                             <td>
                                                 @if ($order->result)
-                                                    {{ $order->result->has_covid ? 'Positive' : 'Negative' }}
+                                                    {!! $order->result->has_covid ? '<span class="text-danger">Positive</span>' : '<span class="text-success">Negative</span>' !!}
                                                 @endif    
                                             </td>
                                             <td>
                                                 <a href="{{ url('orders/' . $order->id) }}" class="btn btn-info">Show</a>
 
-                                                {{-- @if ($order->is_patient_called)
-                                                    <button class="btn btn-outline-info" disabled>Called</button>
-                                                @else
-                                                    <form action="{{ url("orders/{$order->id}/mark-patient-as-called") }}" method="post" style="display:inline">
-                                                        @csrf
-                                                        @method('PATCH')
-                                                        <button class="btn btn-warning">Mark as called</button>
-                                                    </form>
-                                                @endif --}}
-
-                                                
-                                                @if ($order->vitals_document)
-                                                    <a target="_blank" href="{{ $order->vitals_document_url }}" class="btn btn-light" download>Vitals Pdf</a>
-                                                @else
-                                                    <a href="{{ url("orders/{$order->id}/vitals/create") }}" class="btn btn-info">Vitals</a>
-                                                @endif
-                                                
-                                                @if ($order->result)
-                                                    <a target="_blank" href="{{ $order->result->file_url }}" class="btn btn-light" download>Result Pdf</a>
-                                                @endif
-
-                                                @if ($order->patient_phone && !$order->is_patient_notified)
-                                                    <form action="{{ url("orders/{$order->id}/notify-patient-via-sms") }}" method="post" style="display:inline">
-                                                        @csrf
-                                                        <button class="btn btn-secondary">Notify Patient</button>
-                                                    </form>
-                                                @endif
-
-                                                @if ($order->is_patient_notified)
-                                                    <button class="btn btn-outline-info" disabled>Notified</button>
-                                                @endif
+                                                @include('orders._options')
                                             </td>
                                         </tr>
                                     @endforeach

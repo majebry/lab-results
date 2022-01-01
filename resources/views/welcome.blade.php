@@ -4,13 +4,7 @@
 
 <div class="justify-content-center">
     
-    @if ($errors->any())
-        <div class="alert alert-danger" role="alert">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </div>
-    @endif
+    @include('shared.errors')
     
     <div class="card text-center">
         <div class="card-header py-3">
@@ -33,7 +27,7 @@
                     <label class="col-md-4 col-form-label text-md-right">Date of Birth</label>
 
                     <div class="col-md-6">
-                        <input type="date" class="form-control form-control-lg" name="birthdate" placeholder="mm/dd/yyyy">
+                        <input type="text" class="form-control form-control-lg" name="birthdate" placeholder="mm/dd/yyyy">
                     </div>
                 </div>
 

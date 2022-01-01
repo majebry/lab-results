@@ -13,10 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::create([
-            'name' => 'Roumieh',
-            'email' => 'roumieh@premiermedicine.com',
-            'password' => bcrypt('sw3etClub16')
-        ]);
+        $this->call(RolesAndPermissionsSeeder::class);
     }
 }
