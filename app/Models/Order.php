@@ -59,6 +59,11 @@ class Order extends Model
 
     public function routeNotificationForNexmo($notification)
     {
+        return $this->patient_sms_phone_number;
+    }
+
+    public function getPatientSmsPhoneNumberAttribute()
+    {
         return '1' . preg_replace('/[^0-9]/', '', $this->patient_phone);
     }
 }

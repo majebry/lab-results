@@ -5,6 +5,7 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Notifications\Messages\TwilioMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\NexmoMessage;
 
@@ -30,7 +31,7 @@ class ResultAvailable extends Notification
      */
     public function via($notifiable)
     {
-        return ['nexmo'];
+        return [TwilioChannel::class];
     }
 
     /**
@@ -44,6 +45,14 @@ class ResultAvailable extends Notification
         // check if notifiable has a phone number?
         
         return (new NexmoMessage)
+            ->content("Your result is available @ PMTestResults .com
+Use order# {$notifiable->id} & {$notifiable->formatted_date_of_birth} To get your report. 
+Thank you");
+    }
+
+    public function toTwilio($notifiable)
+    {
+        return (new TwilioMessage)
             ->content("Your result is available @ PMTestResults .com
 Use order# {$notifiable->id} & {$notifiable->formatted_date_of_birth} To get your report. 
 Thank you");
