@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             @include('shared.errors')
-            
+
             <div class="card">
                 <div class="card-header">Create an Order</div>
 
@@ -18,6 +18,14 @@
 
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="patient_name" value="{{ old('patient_name') }}">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-md-4 col-form-label text-md-right">ID Card</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="patient_id_card_number" value="{{ old('patient_id_card_number') }}">
                             </div>
                         </div>
 

@@ -15,6 +15,7 @@ class Order extends Model
     protected $fillable = [
         'patient_id',
         'patient_name',
+        'patient_id_card_number',
         'patient_date_of_birth',
         'patient_phone',
         'patient_email',

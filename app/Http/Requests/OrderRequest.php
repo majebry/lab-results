@@ -25,6 +25,7 @@ class OrderRequest extends FormRequest
     {
         return [
             'patient_name' => ['required', 'string'],
+            'patient_id_card_number' => ['required'],
             'patient_date_of_birth' => ['required', 'date_format:m/d/Y'],
             'patient_email' => ['email', 'nullable'],
             'reason_of_test' => ['required', 'in:Traveling,Exposed'],

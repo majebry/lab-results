@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container justify-content-center">
-        
+
         @if ($order)
             <div class="card mb-5">
                 <div class="card-header">Order # <strong><em>{{ $order->id }}</em></strong></div>
@@ -12,6 +12,10 @@
                             <tr>
                                 <th scope="row">Patient Name</th>
                                 <td>{{ $order->patient_name }}</th>
+                            </tr>
+                            <tr>
+                                <th scope="row">ID Card</th>
+                                <td>{{ $order->patient_id_card_number }}</th>
                             </tr>
                             <tr>
                                 <th scope="row">Date of Birth</th>
@@ -105,6 +109,6 @@
                 <p>We couldn't find your the order, please recheck the information you've entered.</p>
             </div>
         @endif
-        
+
     </div>
 @endsection
